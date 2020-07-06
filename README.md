@@ -9,6 +9,8 @@ Esse sistema irá fazer o cadastro de:
 
 O sistema também fará um agendamento, para facilitar o trabalho dos médicos e para evitar filas desnecessárias no local.
 
-Para ter acesso ao programa use as seguintes credências:
+Os dados desse programa ficarao armazenados num banco de dados MySQL.
+
+Para ter acesso ao programa use as seguintes credencias:
 - Usuário: admin
 - Senha: 12345
