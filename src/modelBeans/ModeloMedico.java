@@ -6,11 +6,14 @@ package modelBeans;
  * @author Belmiro-Mungoi
  */
 public class ModeloMedico {
+
+
     private int cod;
     private int crm;
     private String nome;
     private String espec;
     private String bi;
+    private String pesquisa;
 
     public int getCod() {
         return cod;
@@ -50,5 +53,14 @@ public class ModeloMedico {
 
     public void setBi(String bi) {
         this.bi = bi;
+    }    
+    
+    public String getPesquisa() {
+        return pesquisa;
     }
+
+    public void setPesquisa(String pesquisa) {
+        this.pesquisa = pesquisa;
+    }
+
 }
