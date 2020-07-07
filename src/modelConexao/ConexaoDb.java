@@ -26,6 +26,15 @@ public class ConexaoDb {
             JOptionPane.showMessageDialog(null, "Conexao com a base de dados nao efectuada!\nErro: " + e.getMessage());
         }
     }
+    
+    public void executaSql(String sql){
+        try {
+            stm = con.createStatement(rs.TYPE_SCROLL_INSENSITIVE,rs.CONCUR_READ_ONLY);
+            rs = stm.executeQuery(sql);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,"Erro ao executar Sql:\n" + ex.getMessage());
+        }
+    }
 
     public void desconectar(){
         try {
