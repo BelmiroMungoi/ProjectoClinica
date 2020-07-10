@@ -44,6 +44,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuFerra = new javax.swing.JMenu();
         jMenuItemFerraTela = new javax.swing.JMenuItem();
         jMenuAjuda = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemSair = new javax.swing.JMenuItem();
 
@@ -146,6 +147,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuCad.setForeground(new java.awt.Color(0, 0, 0));
         jMenuCad.setText("Cadastro");
 
+        jMenuItemCadMedico.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemCadMedico.setText("Médicos");
         jMenuItemCadMedico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,12 +156,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenuCad.add(jMenuItemCadMedico);
 
+        jMenuItemCadEnfermeiro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemCadEnfermeiro.setText("Enfermeiros");
         jMenuCad.add(jMenuItemCadEnfermeiro);
 
+        jMenuItemCadPaciente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemCadPaciente.setText("Pacientes");
         jMenuCad.add(jMenuItemCadPaciente);
 
+        jMenuItemCadAdmin.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemCadAdmin.setText("Administratores");
         jMenuCad.add(jMenuItemCadAdmin);
 
@@ -174,6 +179,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuFerra.setForeground(new java.awt.Color(0, 0, 0));
         jMenuFerra.setText("Ferramentas");
 
+        jMenuItemFerraTela.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemFerraTela.setText("Tela Bem-Vindo");
         jMenuItemFerraTela.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,12 +193,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuAjuda.setBackground(new java.awt.Color(222, 217, 217));
         jMenuAjuda.setForeground(new java.awt.Color(0, 0, 0));
         jMenuAjuda.setText("Ajuda");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItem1.setText("Sobre");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenuAjuda.add(jMenuItem1);
+
         jMenuBar1.add(jMenuAjuda);
 
         jMenu1.setBackground(new java.awt.Color(222, 217, 217));
         jMenu1.setForeground(new java.awt.Color(0, 0, 0));
-        jMenu1.setText("Sair");
+        jMenu1.setText("Opções");
 
+        jMenuItemSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemSair.setText("Sair");
         jMenuItemSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,8 +249,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jMenuItemCadMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadMedicoActionPerformed
         TelaMedico tela = new TelaMedico();
         tela.setVisible(true);
-        dispose();
     }//GEN-LAST:event_jMenuItemCadMedicoActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        TelaInfo tela = new TelaInfo();
+        tela.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -290,6 +311,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCad;
     private javax.swing.JMenu jMenuFerra;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemCadAdmin;
     private javax.swing.JMenuItem jMenuItemCadEnfermeiro;
     private javax.swing.JMenuItem jMenuItemCadMedico;
