@@ -1,6 +1,13 @@
 
 package view;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import modelBeans.ModelTable;
 import modelConexao.ConexaoDb;
 import modelDao.DaoMedico;
 import modelBeans.ModeloMedico;
@@ -17,6 +24,7 @@ public class TelaMedico extends javax.swing.JFrame {
 
     public TelaMedico() {
         initComponents();
+        preencherTabela("select * from medicos order by nome_medico");
     }
 
     @SuppressWarnings("unchecked")
@@ -38,7 +46,7 @@ public class TelaMedico extends javax.swing.JFrame {
         jButtonCancelar = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableMedico = new javax.swing.JTable();
         jTextFieldPesquisa = new javax.swing.JTextField();
         jButtonPesquisa = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -71,8 +79,10 @@ public class TelaMedico extends javax.swing.JFrame {
 
         jTextFieldNome.setEnabled(false);
 
+        jFormattedTextFieldBi.setToolTipText("Insira 13 Caracteres");
         jFormattedTextFieldBi.setEnabled(false);
 
+        jFormattedTextFieldCrm.setToolTipText("Insira 10 Caracteres");
         jFormattedTextFieldCrm.setEnabled(false);
 
         jComboBoxEspec.setForeground(new java.awt.Color(0, 0, 0));
@@ -116,8 +126,13 @@ public class TelaMedico extends javax.swing.JFrame {
         jButtonExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconDelete.png"))); // NOI18N
         jButtonExcluir.setText("Excluir");
         jButtonExcluir.setEnabled(false);
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableMedico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -128,7 +143,12 @@ public class TelaMedico extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jTableMedico.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableMedicoMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTableMedico);
 
         jButtonPesquisa.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButtonPesquisa.setForeground(new java.awt.Color(0, 0, 0));
@@ -228,9 +248,7 @@ public class TelaMedico extends javax.swing.JFrame {
                             .addComponent(jLabelBi)
                             .addComponent(jFormattedTextFieldBi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabelCrm)
-                            .addGap(1, 1, 1))
+                        .addComponent(jLabelCrm)
                         .addComponent(jFormattedTextFieldCrm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -251,7 +269,7 @@ public class TelaMedico extends javax.swing.JFrame {
                         .addComponent(jButtonCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Sair))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -346,8 +364,14 @@ public class TelaMedico extends javax.swing.JFrame {
         jComboBoxEspec.setEnabled(true);
         jFormattedTextFieldBi.setEnabled(true);
         jFormattedTextFieldCrm.setEnabled(true);
+        jTextFieldNome.setText("");
+        jFormattedTextFieldBi.setText("");
+        jFormattedTextFieldCrm.setText("");  
+        jTextFieldPesquisa.setText("");
         jButtonSalvar.setEnabled(true);
         jButtonCancelar.setEnabled(true);
+        jButtonEditar.setEnabled(false);
+        jButtonExcluir.setEnabled(false);
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
     private void jButtonPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisaActionPerformed
@@ -360,6 +384,11 @@ public class TelaMedico extends javax.swing.JFrame {
         jComboBoxEspec.setSelectedItem(mod.getEspec());
         jButtonEditar.setEnabled(true);
         jButtonExcluir.setEnabled(true);
+        jButtonSalvar.setEnabled(false);
+        jTextFieldNome.setEnabled(false);
+        jComboBoxEspec.setEnabled(false);
+        jFormattedTextFieldBi.setEnabled(false);
+        jFormattedTextFieldCrm.setEnabled(false);
     }//GEN-LAST:event_jButtonPesquisaActionPerformed
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
@@ -379,9 +408,80 @@ public class TelaMedico extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_SairActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        int excluir = JOptionPane.showConfirmDialog(null, "Deseja excluir os dados?", "Atencao", JOptionPane.YES_NO_OPTION);
+        if (excluir == JOptionPane.YES_OPTION){
+            modelo.setCod(Integer.parseInt(jTextFielD.getText()));
+            control.excluir(modelo);
+            jTextFielD.setText("");
+            jTextFieldNome.setText("");
+            jTextFieldPesquisa.setText("");
+            jFormattedTextFieldBi.setText("");
+            jFormattedTextFieldCrm.setText("");
+            jTextFieldNome.setEnabled(false);
+            jComboBoxEspec.setEnabled(false);
+            jFormattedTextFieldBi.setEnabled(false);
+            jFormattedTextFieldCrm.setEnabled(false);
+            jButtonSalvar.setEnabled(false);
+            jButtonEditar.setEnabled(false);
+            jButtonNovo.setEnabled(true);
+        }
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
+
+    private void jTableMedicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMedicoMouseClicked
+        try {
+            String nome_medico = ""+jTableMedico.getValueAt(jTableMedico.getSelectedRow(), 1);
+            connect.conexao();
+            connect.executaSql("select * from medicos where nome_medico = '" + nome_medico + "'");
+            connect.rs.first();
+            jTextFielD.setText(String.valueOf(connect.rs.getInt("idmedico")));
+            jTextFieldNome.setText(connect.rs.getString("nome_medico"));
+            jComboBoxEspec.setSelectedItem(connect.rs.getString("espec_medico"));
+            jFormattedTextFieldCrm.setText(String.valueOf(connect.rs.getInt("crm_medico")));
+            jFormattedTextFieldBi.setText(connect.rs.getString("bi_medico"));
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao selecionar dados:\n" +ex.getMessage());                                                       
+        }
+        jButtonEditar.setEnabled(true);
+        jButtonExcluir.setEnabled(true);
+        connect.desconectar();
+    }//GEN-LAST:event_jTableMedicoMouseClicked
+    
+    public void preencherTabela(String Sql) {
+        ArrayList dados = new ArrayList();
+        String[] colunas = new String[]{"ID","Nome","Especialidade","CRM","BI"};
+        connect.conexao();
+        connect.executaSql(Sql);
+        
+        try {
+            connect.rs.first();
+            do {                
+                dados.add(new Object[]{connect.rs.getInt("idmedico"),
+                    connect.rs.getString("nome_medico"),connect.rs.getString("espec_medico"),
+                    connect.rs.getInt("crm_medico"),connect.rs.getString("bi_medico")});
+            } while (connect.rs.next());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao preencher tabela"+ e.getMessage());
+        }
+        
+        ModelTable model = new ModelTable(dados, colunas);
+        jTableMedico.setModel(model);
+        jTableMedico.getColumnModel().getColumn(0).setPreferredWidth(45);
+        jTableMedico.getColumnModel().getColumn(0).setResizable(false);
+        jTableMedico.getColumnModel().getColumn(1).setPreferredWidth(200);
+        jTableMedico.getColumnModel().getColumn(1).setResizable(false);
+        jTableMedico.getColumnModel().getColumn(2).setPreferredWidth(150);
+        jTableMedico.getColumnModel().getColumn(2).setResizable(false);
+        jTableMedico.getColumnModel().getColumn(3).setPreferredWidth(95);
+        jTableMedico.getColumnModel().getColumn(3).setResizable(false);
+        jTableMedico.getColumnModel().getColumn(4).setPreferredWidth(124);
+        jTableMedico.getColumnModel().getColumn(4).setResizable(false);
+        jTableMedico.getTableHeader().setReorderingAllowed(false);
+        jTableMedico.setAutoResizeMode(jTableMedico.AUTO_RESIZE_OFF);
+        jTableMedico.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        connect.desconectar();
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -434,7 +534,7 @@ public class TelaMedico extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableMedico;
     private javax.swing.JTextField jTextFielD;
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldPesquisa;
