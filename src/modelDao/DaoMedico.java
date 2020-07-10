@@ -30,6 +30,37 @@ public class DaoMedico {
         }
     }
     
+     public void editar(ModeloMedico modelo){
+        connect.conexao();
+        try {
+            PreparedStatement pst = connect.con.prepareStatement("update medicos set nome_medico = ?, espec_medico = ?, crm_medico = ?, bi_medico = ? where idmedico = ?");
+            pst.setString(1, modelo.getNome());
+            pst.setString(2, modelo.getEspec());
+            pst.setInt(3, modelo.getCrm());
+            pst.setString(4, modelo.getBi());
+            pst.setInt(5, modelo.getCod());
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Dados editados com sucesso!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao editar:\n" + e.getMessage());
+        }
+        connect.desconectar();
+    }   
+     
+    public void excluir(ModeloMedico modelo) {
+        connect.conexao();
+        try {
+            PreparedStatement pst = connect.con.prepareStatement("delete from medicos where idmedico = ?");
+            pst.setInt(1, modelo.getCod());
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Dados excluidos!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Erro ao excluir dados:\n" + e.getMessage());
+        }
+        
+        connect.desconectar();
+    }
+ 
     public ModeloMedico pesquisaMed(ModeloMedico mod){
         connect.conexao();
         connect.executaSql("select * from medicos where nome_medico like '%"+mod.getPesquisa()+"%'");
@@ -48,21 +79,6 @@ public class DaoMedico {
         return mod;
     }
     
-    public void editar(ModeloMedico modelo){
-        connect.conexao();
-        try {
-            PreparedStatement pst = connect.con.prepareStatement("update medicos set nome_medico = ?, espec_medico = ?, crm_medico = ?, bi_medico = ? where idmedico = ?");
-            pst.setString(1, modelo.getNome());
-            pst.setString(2, modelo.getEspec());
-            pst.setInt(3, modelo.getCrm());
-            pst.setString(4, modelo.getBi());
-            pst.setInt(5, modelo.getCod());
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Dados editados com sucesso!");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao editar:\n" + e.getMessage());
-        }
-        connect.desconectar();
-    }
+
 
 }
