@@ -7,7 +7,7 @@ Esse sistema irá fazer o cadastro de:
 - Pacientes e
 - Administratores/Usuários do sistema
 
-O sistem irá fazer também uma pesquisa na base de dados para verificar as pessoas cadastras, irá tambem:
+O sistema irá fazer também uma pesquisa na base de dados para verificar as pessoas cadastras, irá tambem:
  - Editar dados dos cadastrados
  - Excluir cadastrados
  - Fará tambem relatórios
