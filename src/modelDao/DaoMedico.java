@@ -72,7 +72,7 @@ public class DaoMedico {
             mod.setBi(connect.rs.getString("bi_medico"));
             mod.setCrm(connect.rs.getInt("crm_medico"));
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao fazer a pesquisa:\n"+e.getMessage());
+            JOptionPane.showMessageDialog(null, "Medico nao cadastrado");
         }
         
         connect.desconectar();
