@@ -3,8 +3,6 @@ package view;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import modelBeans.ModelTable;
@@ -281,14 +279,14 @@ public class TelaMedico extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(298, 298, 298)
-                .addComponent(jLabelCadMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelCadMedico)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -314,6 +312,8 @@ public class TelaMedico extends javax.swing.JFrame {
         jButtonNovo.setEnabled(true);
         jButtonSalvar.setEnabled(false);   
         jButtonExcluir.setEnabled(false);
+        jButtonPesquisa.setEnabled(true);
+        jTextFieldPesquisa.setEnabled(true);
         jTextFielD.setText("");
         jTextFieldNome.setText("");
         jTextFieldPesquisa.setText("");
@@ -323,6 +323,16 @@ public class TelaMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+        if (jTextFieldNome.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Preencha o campo NOME!!!");
+            jTextFieldNome.requestFocus();
+        } else if (jFormattedTextFieldBi.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Preencha o campo BI!!!");
+            jFormattedTextFieldBi.requestFocus();
+        } else if (jFormattedTextFieldCrm.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Preencha o campo CRM!!!");
+            jFormattedTextFieldCrm.requestFocus();
+        }
         if (flag == 1){
             modelo.setNome(jTextFieldNome.getText());
             modelo.setEspec((String) jComboBoxEspec.getSelectedItem());
@@ -336,7 +346,8 @@ public class TelaMedico extends javax.swing.JFrame {
             jComboBoxEspec.setEnabled(false);
             jFormattedTextFieldBi.setEnabled(false);
             jFormattedTextFieldCrm.setEnabled(false);
-            jButtonSalvar.setEnabled(false);      
+            jButtonSalvar.setEnabled(false);   
+            preencherTabela("select * from medicos order by nome_medico");
         }else {
             modelo.setCod(Integer.parseInt(jTextFielD.getText()));
             modelo.setNome(jTextFieldNome.getText());
@@ -355,6 +366,7 @@ public class TelaMedico extends javax.swing.JFrame {
             jFormattedTextFieldCrm.setEnabled(false);
             jButtonSalvar.setEnabled(false);
             jButtonNovo.setEnabled(true);
+            preencherTabela("select * from medicos order by nome_medico");
         }  
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
@@ -368,6 +380,9 @@ public class TelaMedico extends javax.swing.JFrame {
         jFormattedTextFieldBi.setText("");
         jFormattedTextFieldCrm.setText("");  
         jTextFieldPesquisa.setText("");
+        jTextFielD.setText("");
+        jTextFieldPesquisa.setEnabled(false);
+        jButtonPesquisa.setEnabled(false);
         jButtonSalvar.setEnabled(true);
         jButtonCancelar.setEnabled(true);
         jButtonEditar.setEnabled(false);
@@ -382,13 +397,12 @@ public class TelaMedico extends javax.swing.JFrame {
         jFormattedTextFieldBi.setText(String.valueOf(mod.getBi()));
         jFormattedTextFieldCrm.setText(String.valueOf(mod.getCrm()));
         jComboBoxEspec.setSelectedItem(mod.getEspec());
-        jButtonEditar.setEnabled(true);
-        jButtonExcluir.setEnabled(true);
         jButtonSalvar.setEnabled(false);
         jTextFieldNome.setEnabled(false);
         jComboBoxEspec.setEnabled(false);
         jFormattedTextFieldBi.setEnabled(false);
         jFormattedTextFieldCrm.setEnabled(false);
+        preencherTabela("select * from medicos where nome_medico like '%"+mod.getPesquisa()+"%'");
     }//GEN-LAST:event_jButtonPesquisaActionPerformed
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
@@ -425,6 +439,7 @@ public class TelaMedico extends javax.swing.JFrame {
             jButtonSalvar.setEnabled(false);
             jButtonEditar.setEnabled(false);
             jButtonNovo.setEnabled(true);
+            preencherTabela("select * from medicos order by nome_medico");
         }
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
@@ -444,6 +459,14 @@ public class TelaMedico extends javax.swing.JFrame {
         }
         jButtonEditar.setEnabled(true);
         jButtonExcluir.setEnabled(true);
+        jButtonPesquisa.setEnabled(true);
+        jTextFieldPesquisa.setEnabled(true);
+        jButtonSalvar.setEnabled(false);
+        jButtonCancelar.setEnabled(false);
+        jTextFieldNome.setEnabled(false);
+        jComboBoxEspec.setEnabled(false);
+        jFormattedTextFieldBi.setEnabled(false);
+        jFormattedTextFieldCrm.setEnabled(false);
         connect.desconectar();
     }//GEN-LAST:event_jTableMedicoMouseClicked
     
@@ -461,7 +484,9 @@ public class TelaMedico extends javax.swing.JFrame {
                     connect.rs.getInt("crm_medico"),connect.rs.getString("bi_medico")});
             } while (connect.rs.next());
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao preencher tabela"+ e.getMessage());
+            JOptionPane.showMessageDialog(null, "Tente Novamente");
+            jTextFieldPesquisa.setText("");
+            jTextFieldPesquisa.requestFocus();
         }
         
         ModelTable model = new ModelTable(dados, colunas);
