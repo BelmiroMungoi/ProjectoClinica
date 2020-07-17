@@ -4,7 +4,7 @@ Um sistema de cadastro para um hospital ou uma clinica
 Esse sistema irá fazer o cadastro de:
 - Médicos
 - Enfermeiros
-- Pacientes e
+- Pacientes 
 - Administratores/Usuários do sistema
 
 O sistema irá fazer também uma pesquisa na base de dados para verificar as pessoas cadastras, irá tambem:
