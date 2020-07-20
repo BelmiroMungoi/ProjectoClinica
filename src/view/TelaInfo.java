@@ -47,6 +47,7 @@ public class TelaInfo extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sobre o Sistema");
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
@@ -59,7 +60,7 @@ public class TelaInfo extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 102));
         jLabel2.setText("Desenvolvido por Belmiro Mungoi");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(20, 120, 263, 23);
+        jLabel2.setBounds(20, 120, 290, 23);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 102));
@@ -69,13 +70,13 @@ public class TelaInfo extends javax.swing.JFrame {
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/gpl.png"))); // NOI18N
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(380, 0, 180, 270);
+        jLabel5.setBounds(410, 0, 180, 270);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundoBrancoPainel.png"))); // NOI18N
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(1, -4, 560, 280);
+        jLabel4.setBounds(1, -4, 590, 280);
 
-        setSize(new java.awt.Dimension(576, 312));
+        setSize(new java.awt.Dimension(606, 312));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
