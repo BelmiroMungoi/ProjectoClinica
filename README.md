@@ -23,5 +23,5 @@ Para ter acesso ao programa use as seguintes credencias:
    - Senha: admin
    
  - Recepcionista
-   - Usuario: user
+   - Usuário: user
    - Senha: 1234
