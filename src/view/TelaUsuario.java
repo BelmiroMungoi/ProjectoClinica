@@ -4,6 +4,7 @@ package view;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import modelBeans.BeansUsuario;
 import modelBeans.ModelTable;
@@ -326,6 +327,7 @@ public class TelaUsuario extends javax.swing.JFrame {
             jTextFieldLogin.setEnabled(false);
             jPasswordFieldSenha.setEnabled(false);
             jButtonSave.setEnabled(false);
+            jButtonNew.setEnabled(true);
             preencherTabela("select * from usuario order by nome_usuario");
             } else {
                 modelo.setUsuCod(Integer.parseInt(jTextFieldID.getText()));
@@ -415,10 +417,10 @@ public class TelaUsuario extends javax.swing.JFrame {
         jPasswordFieldSenha.setEnabled(false);
         jButtonSave.setEnabled(false);
         jButtonEdit.setEnabled(false);
-        jButtonCancel.setEnabled(false);
         jButtonNew.setEnabled(true);   
         jButtonBusca.setEnabled(true);
         jTextFieldBusca.setEnabled(true);
+        preencherTabela("select * from usuario order by nome_usuario");
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jTableUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableUserMouseClicked
@@ -461,10 +463,12 @@ public class TelaUsuario extends javax.swing.JFrame {
                     connect.rs.getString("nome_usuario"), connect.rs.getString("login"),
                     connect.rs.getString("senha"), connect.rs.getString("perfil")});
             } while (connect.rs.next());
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Tente Novamente");
             jTextFieldBusca.setText("");
             jTextFieldBusca.requestFocus();
+            jButtonEdit.setEnabled(false);
+            jButtonDelete.setEnabled(false);
         }
         
         ModelTable model = new ModelTable(dados, colunas);
@@ -480,7 +484,7 @@ public class TelaUsuario extends javax.swing.JFrame {
         jTableUser.getColumnModel().getColumn(4).setPreferredWidth(124);
         jTableUser.getColumnModel().getColumn(4).setResizable(false);
         jTableUser.getTableHeader().setReorderingAllowed(false);
-        jTableUser.setAutoResizeMode(jTableUser.AUTO_RESIZE_OFF);
+        jTableUser.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         jTableUser.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         connect.desconectar();
     }
