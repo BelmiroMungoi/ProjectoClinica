@@ -67,7 +67,7 @@ public class DaoUsuario {
     
     public BeansUsuario pesquisarUsu(BeansUsuario modelo) {
         connect.conexao();
-        connect.executaSql("select * from usuario where nome_usuario like '%"+modelo.getPesquisa()+"'");
+        connect.executaSql("select * from usuario where nome_usuario like '%"+modelo.getPesquisa()+"%'");
         try {
             connect.rs.first();
             modelo.setUsuCod(connect.rs.getInt("id_usuario"));
@@ -80,5 +80,5 @@ public class DaoUsuario {
         }
         connect.desconectar();
         return modelo;
-    }
+    } 
 }
