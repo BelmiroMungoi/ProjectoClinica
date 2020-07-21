@@ -19,8 +19,9 @@ Foi usada a versao 5.1.49 do JDBC para a conexao do Java com MySQL.
 
 Para ter acesso ao programa use as seguintes credencias:
  - Administrador
-  - Usuário: admin
-  - Senha: admin
+   - Usuário: admin
+   - Senha: admin
+   
  - Recepcionista
-  - Usuario: user
-  - Senha: 1234
+   - Usuario: user
+   - Senha: 1234
