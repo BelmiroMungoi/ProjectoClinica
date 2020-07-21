@@ -1,6 +1,7 @@
 
 package view;
 
+import javax.swing.JOptionPane;
 import modelConexao.ConexaoDb;
 
 /**
@@ -10,9 +11,14 @@ import modelConexao.ConexaoDb;
 public class TelaPrincipal extends javax.swing.JFrame {
     ConexaoDb conecta = new ConexaoDb();
 
-    public TelaPrincipal() {
+    public TelaPrincipal(String user) {
         initComponents();
+        jLabelUser.setText(user);
         conecta.conexao();
+    }
+
+    private TelaPrincipal() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @SuppressWarnings("unchecked")
@@ -33,6 +39,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanelPrincipal = new javax.swing.JPanel();
         jLabelSisGes = new javax.swing.JLabel();
         jButtonSair = new javax.swing.JButton();
+        jLabelUser = new javax.swing.JLabel();
         jLabelTelaPrincipal = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuCad = new javax.swing.JMenu();
@@ -46,6 +53,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuAjuda = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItemOutra = new javax.swing.JMenuItem();
         jMenuItemSair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -141,7 +149,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jInternalFrameBemVindo);
         jInternalFrameBemVindo.setBounds(0, 130, 970, 460);
 
-        jLabelTelaPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundoPrincipal.png"))); // NOI18N
+        jLabelUser.setText("Usuario");
+        getContentPane().add(jLabelUser);
+        jLabelUser.setBounds(0, 100, 100, 30);
+
+        jLabelTelaPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundoPrincipal02.png"))); // NOI18N
         getContentPane().add(jLabelTelaPrincipal);
         jLabelTelaPrincipal.setBounds(0, 0, 970, 590);
 
@@ -219,6 +231,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu1.setForeground(new java.awt.Color(0, 0, 0));
         jMenu1.setText("Opções");
 
+        jMenuItemOutra.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemOutra.setText("Usar Outra Conta?");
+        jMenuItemOutra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemOutraActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemOutra);
+
         jMenuItemSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemSair.setText("Sair");
         jMenuItemSair.addActionListener(new java.awt.event.ActionListener() {
@@ -242,8 +263,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemSairActionPerformed
 
     private void jButtonCadastroMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastroMedicoActionPerformed
-        TelaMedico tela = new TelaMedico();
-        tela.setVisible(true);
+        try {
+            conecta.executaSql("select * from usuario where login = '"+jLabelUser.getText()+"'");
+            conecta.rs.first();
+            if (conecta.rs.getString("perfil").equals("Administrador")) {
+                TelaMedico tela = new TelaMedico();
+                tela.setVisible(true);
+            } else
+                JOptionPane.showMessageDialog(null, "Sem permissao para acessar");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Sem permissao para acessar");
+        }  
     }//GEN-LAST:event_jButtonCadastroMedicoActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
@@ -255,8 +285,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemFerraTelaActionPerformed
 
     private void jMenuItemCadMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadMedicoActionPerformed
-        TelaMedico tela = new TelaMedico();
-        tela.setVisible(true);
+        try {
+            conecta.executaSql("select * from usuario where login = '"+jLabelUser.getText()+"'");
+            conecta.rs.first();
+            if (conecta.rs.getString("perfil").equals("Administrador")) {
+                TelaMedico tela = new TelaMedico();
+                tela.setVisible(true);
+            } else
+                JOptionPane.showMessageDialog(null, "Sem permissao para acessar\nContacte o Administrator");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Sem permissao para acessar\nContacte o Administrator");
+        }   
     }//GEN-LAST:event_jMenuItemCadMedicoActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -265,14 +304,38 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jButtonCadastroAdministratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastroAdministratorActionPerformed
-        TelaUsuario tela = new TelaUsuario();
-        tela.setVisible(true);
+        try {
+            conecta.executaSql("select * from usuario where login = '"+jLabelUser.getText()+"'");
+            conecta.rs.first();
+            if (conecta.rs.getString("perfil").equals("Administrador")) {
+                TelaUsuario tela = new TelaUsuario();
+                tela.setVisible(true);
+            } else
+                JOptionPane.showMessageDialog(null, "Sem permissao para acessar\nContacte o Administrator");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Sem permissao para acessar\nContacte o Administrator");
+        }  
     }//GEN-LAST:event_jButtonCadastroAdministratorActionPerformed
 
     private void jMenuItemCadAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadAdminActionPerformed
-        TelaUsuario tela = new TelaUsuario();
-        tela.setVisible(true);
+        try {
+            conecta.executaSql("select * from usuario where login = '"+jLabelUser.getText()+"'");
+            conecta.rs.first();
+            if (conecta.rs.getString("perfil").equals("Administrador")) {
+                TelaUsuario tela = new TelaUsuario();
+                tela.setVisible(true);
+            } else
+                JOptionPane.showMessageDialog(null, "Sem permissao para acessar\nContacte o Administrator");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Sem permissao para acessar\nContacte o Administrator");
+        }  
     }//GEN-LAST:event_jMenuItemCadAdminActionPerformed
+
+    private void jMenuItemOutraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOutraActionPerformed
+        TelaLogin tela = new TelaLogin();
+        tela.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jMenuItemOutraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -324,6 +387,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelFundoPainel;
     private javax.swing.JLabel jLabelSisGes;
     private javax.swing.JLabel jLabelTelaPrincipal;
+    private javax.swing.JLabel jLabelUser;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenuAjuda;
     private javax.swing.JMenuBar jMenuBar1;
@@ -335,6 +399,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemCadMedico;
     private javax.swing.JMenuItem jMenuItemCadPaciente;
     private javax.swing.JMenuItem jMenuItemFerraTela;
+    private javax.swing.JMenuItem jMenuItemOutra;
     private javax.swing.JMenuItem jMenuItemSair;
     private javax.swing.JMenu jMenuRela;
     private javax.swing.JPanel jPanelPrincipal;
