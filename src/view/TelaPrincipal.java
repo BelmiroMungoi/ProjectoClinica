@@ -10,6 +10,8 @@ import modelConexao.ConexaoDb;
  */
 public class TelaPrincipal extends javax.swing.JFrame {
     ConexaoDb conecta = new ConexaoDb();
+    TelaMedico tela = new TelaMedico();
+    TelaUsuario tela2 = new TelaUsuario();
 
     public TelaPrincipal(String user) {
         initComponents();
@@ -81,6 +83,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jButtonCadastroMedico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cadMedico.png"))); // NOI18N
         jButtonCadastroMedico.setToolTipText("Médicos");
+        jButtonCadastroMedico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonCadastroMedico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCadastroMedicoActionPerformed(evt);
@@ -91,16 +94,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jButtonCadastroEnfermeiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cadEnfermeira.png"))); // NOI18N
         jButtonCadastroEnfermeiro.setToolTipText("Enfermeiros");
+        jButtonCadastroEnfermeiro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jInternalFrameBemVindo.getContentPane().add(jButtonCadastroEnfermeiro);
         jButtonCadastroEnfermeiro.setBounds(170, 70, 160, 150);
 
         jButtonCadastroPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cadPaciente.png"))); // NOI18N
         jButtonCadastroPaciente.setToolTipText("Pacientes");
+        jButtonCadastroPaciente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonCadastroPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCadastroPacienteActionPerformed(evt);
+            }
+        });
         jInternalFrameBemVindo.getContentPane().add(jButtonCadastroPaciente);
         jButtonCadastroPaciente.setBounds(330, 70, 160, 150);
 
         jButtonCadastroAdministrator.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cadAdministrator.png"))); // NOI18N
         jButtonCadastroAdministrator.setToolTipText("Administratores");
+        jButtonCadastroAdministrator.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonCadastroAdministrator.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCadastroAdministratorActionPerformed(evt);
@@ -117,6 +128,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jButtonAgenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/page2.png"))); // NOI18N
         jButtonAgenda.setToolTipText("Ver Agenda");
+        jButtonAgenda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jInternalFrameBemVindo.getContentPane().add(jButtonAgenda);
         jButtonAgenda.setBounds(10, 260, 160, 150);
 
@@ -166,6 +178,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuItemCadMedico.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemCadMedico.setText("Médicos");
+        jMenuItemCadMedico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItemCadMedico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemCadMedicoActionPerformed(evt);
@@ -267,8 +280,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
             conecta.executaSql("select * from usuario where login = '"+jLabelUser.getText()+"'");
             conecta.rs.first();
             if (conecta.rs.getString("perfil").equals("Administrador")) {
-                TelaMedico tela = new TelaMedico();
-                tela.setVisible(true);
+                if(tela == null){
+                    tela = new TelaMedico();
+                    tela.setVisible(true);
+                } else{
+                    tela.setVisible(true);
+                }
             } else
                 JOptionPane.showMessageDialog(null, "Sem permissao para acessar");
         } catch (Exception e) {
@@ -289,8 +306,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
             conecta.executaSql("select * from usuario where login = '"+jLabelUser.getText()+"'");
             conecta.rs.first();
             if (conecta.rs.getString("perfil").equals("Administrador")) {
-                TelaMedico tela = new TelaMedico();
-                tela.setVisible(true);
+                if(tela == null){
+                    tela = new TelaMedico();
+                    tela.setVisible(true);
+                } else{
+                    tela.setVisible(true);
+                }
             } else
                 JOptionPane.showMessageDialog(null, "Sem permissao para acessar\nContacte o Administrator");
         } catch (Exception e) {
@@ -308,8 +329,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
             conecta.executaSql("select * from usuario where login = '"+jLabelUser.getText()+"'");
             conecta.rs.first();
             if (conecta.rs.getString("perfil").equals("Administrador")) {
-                TelaUsuario tela = new TelaUsuario();
-                tela.setVisible(true);
+                if(tela2 == null){
+                    tela2 = new TelaUsuario();
+                    tela2.setVisible(true);
+                } else{
+                    tela2.setVisible(true);
+                }
             } else
                 JOptionPane.showMessageDialog(null, "Sem permissao para acessar\nContacte o Administrator");
         } catch (Exception e) {
@@ -322,8 +347,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
             conecta.executaSql("select * from usuario where login = '"+jLabelUser.getText()+"'");
             conecta.rs.first();
             if (conecta.rs.getString("perfil").equals("Administrador")) {
-                TelaUsuario tela = new TelaUsuario();
-                tela.setVisible(true);
+                if(tela2 == null){
+                    tela2 = new TelaUsuario();
+                    tela2.setVisible(true);
+                } else{
+                    tela2.setVisible(true);
+                }
             } else
                 JOptionPane.showMessageDialog(null, "Sem permissao para acessar\nContacte o Administrator");
         } catch (Exception e) {
@@ -336,6 +365,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         tela.setVisible(true);
         dispose();
     }//GEN-LAST:event_jMenuItemOutraActionPerformed
+
+    private void jButtonCadastroPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastroPacienteActionPerformed
+        TelaPaciente tela = new TelaPaciente();
+        tela.setVisible(true);
+    }//GEN-LAST:event_jButtonCadastroPacienteActionPerformed
 
     /**
      * @param args the command line arguments
