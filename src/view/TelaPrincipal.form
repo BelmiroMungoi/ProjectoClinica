@@ -29,6 +29,9 @@
                   <KeyStroke key="Alt+Q"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="M&#xe9;dicos"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Hand Cursor"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemCadMedicoActionPerformed"/>
@@ -251,6 +254,9 @@
               <Image iconType="3" name="/images/cadMedico.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="M&#xe9;dicos"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCadastroMedicoActionPerformed"/>
@@ -267,6 +273,9 @@
               <Image iconType="3" name="/images/cadEnfermeira.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Enfermeiros"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -280,7 +289,13 @@
               <Image iconType="3" name="/images/cadPaciente.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Pacientes"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCadastroPacienteActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="330" y="70" width="160" height="150"/>
@@ -293,6 +308,9 @@
               <Image iconType="3" name="/images/cadAdministrator.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Administratores"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCadastroAdministratorActionPerformed"/>
@@ -325,6 +343,9 @@
               <Image iconType="3" name="/images/page2.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Ver Agenda"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
