@@ -1,5 +1,5 @@
 # ProjectoClinica
-Um sistema de cadastro para um hospital ou uma clinica
+Um sistema de cadastro e gestao de um hospital ou uma clinica
 
 Esse sistema irá fazer o cadastro de:
 - Médicos
