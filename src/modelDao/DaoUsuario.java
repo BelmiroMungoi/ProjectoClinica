@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelDao;
 
 import java.sql.PreparedStatement;
@@ -19,6 +15,7 @@ public class DaoUsuario {
     ConexaoDb connect = new ConexaoDb();
     BeansUsuario modelo = new BeansUsuario();
     
+
     public void Salvar(BeansUsuario modelo){
         connect.conexao();
         try {
