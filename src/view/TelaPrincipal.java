@@ -12,6 +12,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     ConexaoDb conecta = new ConexaoDb();
     TelaMedico tela = new TelaMedico();
     TelaUsuario tela2 = new TelaUsuario();
+    TelaPaciente telaPac = new TelaPaciente();
 
     public TelaPrincipal(String user) {
         initComponents();
@@ -192,6 +193,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuItemCadPaciente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemCadPaciente.setText("Pacientes");
+        jMenuItemCadPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCadPacienteActionPerformed(evt);
+            }
+        });
         jMenuCad.add(jMenuItemCadPaciente);
 
         jMenuItemCadAdmin.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.ALT_MASK));
@@ -367,9 +373,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemOutraActionPerformed
 
     private void jButtonCadastroPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastroPacienteActionPerformed
-        TelaPaciente tela = new TelaPaciente();
-        tela.setVisible(true);
+        if(telaPac == null){
+            telaPac = new TelaPaciente();
+            telaPac.setVisible(true);
+        } else{
+            telaPac.setVisible(true);
+        }
     }//GEN-LAST:event_jButtonCadastroPacienteActionPerformed
+
+    private void jMenuItemCadPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadPacienteActionPerformed
+        if(telaPac == null){
+            telaPac = new TelaPaciente();
+            telaPac.setVisible(true);
+        } else{
+            telaPac.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItemCadPacienteActionPerformed
 
     /**
      * @param args the command line arguments
