@@ -77,12 +77,23 @@ public class TelaMedico extends javax.swing.JFrame {
 
         jTextFieldNome.setEnabled(false);
 
+        try {
+            jFormattedTextFieldBi.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#############")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         jFormattedTextFieldBi.setToolTipText("Insira 13 Caracteres");
         jFormattedTextFieldBi.setEnabled(false);
 
+        try {
+            jFormattedTextFieldCrm.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         jFormattedTextFieldCrm.setToolTipText("Insira 10 Caracteres");
         jFormattedTextFieldCrm.setEnabled(false);
 
+        jComboBoxEspec.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jComboBoxEspec.setForeground(new java.awt.Color(0, 0, 0));
         jComboBoxEspec.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Anatomia Patologica", "Anestesiologia", "Cardiologia", "Cirugia Geral", "Dermatovenereologia", "Dermatologia", "Deontologia", "Doencas Infeciosas", "Estomatologia", "Ginecologia", "Oftamologia", "Ortopedia", "Pediatria", "Pneumologia", "Psiquiatria", "Radiologia", "Saude Publica", " ", " " }));
         jComboBoxEspec.setEnabled(false);
@@ -192,17 +203,17 @@ public class TelaMedico extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabelNome)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabelEspec)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBoxEspec, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabelCrm)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jFormattedTextFieldCrm))))
+                                .addComponent(jFormattedTextFieldCrm, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabelEspec)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBoxEspec, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jButtonNovo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -239,10 +250,9 @@ public class TelaMedico extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelBi)
-                            .addComponent(jFormattedTextFieldBi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabelCrm)
-                        .addComponent(jFormattedTextFieldCrm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jFormattedTextFieldBi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelCrm)))
+                    .addComponent(jFormattedTextFieldCrm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonPesquisa)
@@ -289,7 +299,7 @@ public class TelaMedico extends javax.swing.JFrame {
                 .addComponent(jLabelCadMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         setSize(new java.awt.Dimension(854, 571));
@@ -320,10 +330,10 @@ public class TelaMedico extends javax.swing.JFrame {
         if (jTextFieldNome.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Preencha o campo NOME!!!");
             jTextFieldNome.requestFocus();
-        } else if (jFormattedTextFieldBi.getText().isEmpty()){
+        } else if (jFormattedTextFieldBi.getText().equals("             ")){
             JOptionPane.showMessageDialog(null, "Preencha o campo BI!!!");
             jFormattedTextFieldBi.requestFocus();
-        } else if (jFormattedTextFieldCrm.getText().isEmpty()){
+        } else if (jFormattedTextFieldCrm.getText().equals("          ")){
             JOptionPane.showMessageDialog(null, "Preencha o campo CRM!!!");
             jFormattedTextFieldCrm.requestFocus();
         }
