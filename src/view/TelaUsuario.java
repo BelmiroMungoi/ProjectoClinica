@@ -83,7 +83,7 @@ public class TelaUsuario extends javax.swing.JFrame {
 
         jComboBoxPerfil.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jComboBoxPerfil.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBoxPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Recepcionista", " " }));
+        jComboBoxPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Recepcionista", "Medico" }));
         jComboBoxPerfil.setEnabled(false);
 
         jButtonBusca.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
