@@ -9,14 +9,14 @@ import javax.swing.ListSelectionModel;
 import modelBeans.ModelTable;
 import modelConexao.ConexaoDb;
 import modelDao.DaoMedico;
-import modelBeans.ModeloMedico;
+import modelBeans.BeansMedico;
 
 /**
  *
  * @author Belmiro-Mungoi
  */
 public class TelaMedico extends javax.swing.JFrame {
-    ModeloMedico modelo = new ModeloMedico();
+    BeansMedico modelo = new BeansMedico();
     DaoMedico control = new DaoMedico();
     ConexaoDb connect = new ConexaoDb(); 
     int flag = 1;
@@ -77,11 +77,7 @@ public class TelaMedico extends javax.swing.JFrame {
 
         jTextFieldNome.setEnabled(false);
 
-        try {
-            jFormattedTextFieldBi.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#############")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        jFormattedTextFieldBi.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
         jFormattedTextFieldBi.setToolTipText("Insira 13 Caracteres");
         jFormattedTextFieldBi.setEnabled(false);
 
@@ -395,13 +391,15 @@ public class TelaMedico extends javax.swing.JFrame {
 
     private void jButtonPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisaActionPerformed
         modelo.setPesquisa(jTextFieldPesquisa.getText());
-        ModeloMedico mod = control.pesquisaMed(modelo);
+        BeansMedico mod = control.pesquisaMed(modelo);
         jTextFielD.setText(String.valueOf(mod.getCod()));
         jTextFieldNome.setText(mod.getNome());
         jFormattedTextFieldBi.setText(String.valueOf(mod.getBi()));
         jFormattedTextFieldCrm.setText(String.valueOf(mod.getCrm()));
         jComboBoxEspec.setSelectedItem(mod.getEspec());
         jButtonSalvar.setEnabled(false);
+        jButtonEditar.setEnabled(false);
+        jButtonExcluir.setEnabled(false);
         jTextFieldNome.setEnabled(false);
         jComboBoxEspec.setEnabled(false);
         jFormattedTextFieldBi.setEnabled(false);
