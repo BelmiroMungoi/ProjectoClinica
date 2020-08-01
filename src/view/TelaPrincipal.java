@@ -13,6 +13,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     TelaMedico tela = new TelaMedico();
     TelaUsuario tela2 = new TelaUsuario();
     TelaPaciente telaPac = new TelaPaciente();
+    TelaEnfermeiro telaEnfer = new TelaEnfermeiro();
 
     public TelaPrincipal(String user) {
         initComponents();
@@ -96,6 +97,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jButtonCadastroEnfermeiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cadEnfermeira.png"))); // NOI18N
         jButtonCadastroEnfermeiro.setToolTipText("Enfermeiros");
         jButtonCadastroEnfermeiro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonCadastroEnfermeiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCadastroEnfermeiroActionPerformed(evt);
+            }
+        });
         jInternalFrameBemVindo.getContentPane().add(jButtonCadastroEnfermeiro);
         jButtonCadastroEnfermeiro.setBounds(170, 70, 160, 150);
 
@@ -189,6 +195,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuItemCadEnfermeiro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemCadEnfermeiro.setText("Enfermeiros");
+        jMenuItemCadEnfermeiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCadEnfermeiroActionPerformed(evt);
+            }
+        });
         jMenuCad.add(jMenuItemCadEnfermeiro);
 
         jMenuItemCadPaciente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_MASK));
@@ -389,6 +400,42 @@ public class TelaPrincipal extends javax.swing.JFrame {
             telaPac.setVisible(true);
         }
     }//GEN-LAST:event_jMenuItemCadPacienteActionPerformed
+
+    private void jButtonCadastroEnfermeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastroEnfermeiroActionPerformed
+        try {
+            conecta.executaSql("select * from usuario where login = '"+jLabelUser.getText()+"'");
+            conecta.rs.first();
+            if (conecta.rs.getString("perfil").equals("Administrador")) {
+                if(telaEnfer == null){
+                    telaEnfer = new TelaEnfermeiro();
+                    telaEnfer.setVisible(true);
+                } else{
+                    telaEnfer.setVisible(true);
+                }
+            } else
+                JOptionPane.showMessageDialog(null, "Sem permissao para acessar");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Sem permissao para acessar");
+        } 
+    }//GEN-LAST:event_jButtonCadastroEnfermeiroActionPerformed
+
+    private void jMenuItemCadEnfermeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadEnfermeiroActionPerformed
+        try {
+            conecta.executaSql("select * from usuario where login = '"+jLabelUser.getText()+"'");
+            conecta.rs.first();
+            if (conecta.rs.getString("perfil").equals("Administrador")) {
+                if(telaEnfer == null){
+                    telaEnfer = new TelaEnfermeiro();
+                    telaEnfer.setVisible(true);
+                } else{
+                    telaEnfer.setVisible(true);
+                }
+            } else
+                JOptionPane.showMessageDialog(null, "Sem permissao para acessar");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Sem permissao para acessar");
+        }
+    }//GEN-LAST:event_jMenuItemCadEnfermeiroActionPerformed
 
     /**
      * @param args the command line arguments
