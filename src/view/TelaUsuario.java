@@ -428,6 +428,7 @@ public class TelaUsuario extends javax.swing.JFrame {
         jPasswordFieldSenha.setEnabled(false);
         jButtonSave.setEnabled(false);
         jButtonEdit.setEnabled(false);
+        jButtonDelete.setEnabled(false);
         jButtonNew.setEnabled(true);   
         jButtonBusca.setEnabled(true);
         jTextFieldBusca.setEnabled(true);
@@ -458,7 +459,7 @@ public class TelaUsuario extends javax.swing.JFrame {
         jTextFieldLogin.setEnabled(false);
         jPasswordFieldSenha.setEnabled(false);
         jButtonSave.setEnabled(false);
-        jButtonCancel.setEnabled(false);
+        jButtonCancel.setEnabled(true);
         connect.desconectar();
     }//GEN-LAST:event_jTableUserMouseClicked
 
@@ -484,7 +485,7 @@ public class TelaUsuario extends javax.swing.JFrame {
         
         ModelTable model = new ModelTable(dados, colunas);
         jTableUser.setModel(model);
-        jTableUser.getColumnModel().getColumn(0).setPreferredWidth(45);
+        jTableUser.getColumnModel().getColumn(0).setPreferredWidth(46);
         jTableUser.getColumnModel().getColumn(0).setResizable(false);
         jTableUser.getColumnModel().getColumn(1).setPreferredWidth(200);
         jTableUser.getColumnModel().getColumn(1).setResizable(false);
@@ -492,7 +493,7 @@ public class TelaUsuario extends javax.swing.JFrame {
         jTableUser.getColumnModel().getColumn(2).setResizable(false);
         jTableUser.getColumnModel().getColumn(3).setPreferredWidth(95);
         jTableUser.getColumnModel().getColumn(3).setResizable(false);
-        jTableUser.getColumnModel().getColumn(4).setPreferredWidth(124);
+        jTableUser.getColumnModel().getColumn(4).setPreferredWidth(126);
         jTableUser.getColumnModel().getColumn(4).setResizable(false);
         jTableUser.getTableHeader().setReorderingAllowed(false);
         jTableUser.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
