@@ -699,10 +699,10 @@ public class TelaPaciente extends javax.swing.JFrame {
         jTablePac.getColumnModel().getColumn(2).setResizable(false);
         jTablePac.getColumnModel().getColumn(3).setPreferredWidth(120);
         jTablePac.getColumnModel().getColumn(3).setResizable(false);
-        jTablePac.getColumnModel().getColumn(4).setPreferredWidth(124);
+        jTablePac.getColumnModel().getColumn(4).setPreferredWidth(110);
         jTablePac.getColumnModel().getColumn(4).setResizable(false);
-        jTablePac.getColumnModel().getColumn(4).setPreferredWidth(120);
-        jTablePac.getColumnModel().getColumn(4).setResizable(false);
+        jTablePac.getColumnModel().getColumn(5).setPreferredWidth(120);
+        jTablePac.getColumnModel().getColumn(5).setResizable(false);
         jTablePac.getTableHeader().setReorderingAllowed(false);
         jTablePac.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         jTablePac.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
