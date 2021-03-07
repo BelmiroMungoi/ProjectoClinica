@@ -3,6 +3,10 @@ package view;
 
 import javax.swing.JOptionPane;
 import modelConexao.ConexaoDb;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -14,6 +18,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     TelaUsuario tela2 = new TelaUsuario();
     TelaPaciente telaPac = new TelaPaciente();
     TelaEnfermeiro telaEnfer = new TelaEnfermeiro();
+    TelaAgendamento telaAgen = new TelaAgendamento();
 
     public TelaPrincipal(String user) {
         initComponents();
@@ -52,8 +57,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuItemCadPaciente = new javax.swing.JMenuItem();
         jMenuItemCadAdmin = new javax.swing.JMenuItem();
         jMenuRela = new javax.swing.JMenu();
+        jMenuItemRelMedico = new javax.swing.JMenuItem();
+        jMenuItemRelEnfermeiro = new javax.swing.JMenuItem();
+        jMenuItemRelPaciente = new javax.swing.JMenuItem();
+        jMenuItemRelUsuario = new javax.swing.JMenuItem();
+        jMenuItemCon = new javax.swing.JMenuItem();
         jMenuFerra = new javax.swing.JMenu();
         jMenuItemFerraTela = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItemAgen = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuAjuda = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
@@ -61,10 +75,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuItemSair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
+        setResizable(false);
         getContentPane().setLayout(null);
 
-        jInternalFrameBemVindo.setForeground(new java.awt.Color(0, 0, 0));
+        jInternalFrameBemVindo.setBackground(new java.awt.Color(255, 255, 255));
+        jInternalFrameBemVindo.setForeground(new java.awt.Color(255, 255, 255));
         jInternalFrameBemVindo.setTitle("Bem-Vindo ao Sistema");
         jInternalFrameBemVindo.setVisible(true);
         jInternalFrameBemVindo.getContentPane().setLayout(null);
@@ -77,11 +92,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jLabelFundoLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconClinica2.png"))); // NOI18N
         jInternalFrameBemVindo.getContentPane().add(jLabelFundoLogo);
-        jLabelFundoLogo.setBounds(700, 190, 270, 240);
+        jLabelFundoLogo.setBounds(720, 220, 270, 240);
 
         jLabelBbmLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo00.png"))); // NOI18N
         jInternalFrameBemVindo.getContentPane().add(jLabelBbmLogo);
-        jLabelBbmLogo.setBounds(720, 130, 210, 100);
+        jLabelBbmLogo.setBounds(740, 170, 210, 100);
 
         jButtonCadastroMedico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cadMedico.png"))); // NOI18N
         jButtonCadastroMedico.setToolTipText("Médicos");
@@ -92,7 +107,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         jInternalFrameBemVindo.getContentPane().add(jButtonCadastroMedico);
-        jButtonCadastroMedico.setBounds(10, 70, 160, 150);
+        jButtonCadastroMedico.setBounds(10, 70, 160, 170);
 
         jButtonCadastroEnfermeiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cadEnfermeira.png"))); // NOI18N
         jButtonCadastroEnfermeiro.setToolTipText("Enfermeiros");
@@ -103,7 +118,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         jInternalFrameBemVindo.getContentPane().add(jButtonCadastroEnfermeiro);
-        jButtonCadastroEnfermeiro.setBounds(170, 70, 160, 150);
+        jButtonCadastroEnfermeiro.setBounds(170, 70, 160, 170);
 
         jButtonCadastroPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cadPaciente.png"))); // NOI18N
         jButtonCadastroPaciente.setToolTipText("Pacientes");
@@ -114,7 +129,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         jInternalFrameBemVindo.getContentPane().add(jButtonCadastroPaciente);
-        jButtonCadastroPaciente.setBounds(330, 70, 160, 150);
+        jButtonCadastroPaciente.setBounds(330, 70, 160, 170);
 
         jButtonCadastroAdministrator.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cadAdministrator.png"))); // NOI18N
         jButtonCadastroAdministrator.setToolTipText("Administratores");
@@ -125,23 +140,28 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         jInternalFrameBemVindo.getContentPane().add(jButtonCadastroAdministrator);
-        jButtonCadastroAdministrator.setBounds(490, 70, 160, 150);
+        jButtonCadastroAdministrator.setBounds(490, 70, 160, 170);
 
         jLabelAgenda.setFont(new java.awt.Font("Dialog", 3, 14)); // NOI18N
         jLabelAgenda.setForeground(new java.awt.Color(0, 0, 0));
-        jLabelAgenda.setText("Agenda:");
+        jLabelAgenda.setText("Agendamento:");
         jInternalFrameBemVindo.getContentPane().add(jLabelAgenda);
-        jLabelAgenda.setBounds(10, 230, 60, 19);
+        jLabelAgenda.setBounds(10, 260, 110, 19);
 
         jButtonAgenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/page2.png"))); // NOI18N
-        jButtonAgenda.setToolTipText("Ver Agenda");
+        jButtonAgenda.setToolTipText("Fazer Agendamento");
         jButtonAgenda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonAgenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgendaActionPerformed(evt);
+            }
+        });
         jInternalFrameBemVindo.getContentPane().add(jButtonAgenda);
-        jButtonAgenda.setBounds(10, 260, 160, 150);
+        jButtonAgenda.setBounds(10, 290, 160, 170);
 
         jLabelFundoPainel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundoBrancoPainel.png"))); // NOI18N
         jInternalFrameBemVindo.getContentPane().add(jLabelFundoPainel);
-        jLabelFundoPainel.setBounds(0, 40, 970, 390);
+        jLabelFundoPainel.setBounds(0, 40, 1000, 440);
 
         jPanelPrincipal.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanelPrincipal.setLayout(null);
@@ -163,23 +183,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         jInternalFrameBemVindo.getContentPane().add(jButtonSair);
-        jButtonSair.setBounds(900, 0, 50, 40);
+        jButtonSair.setBounds(940, 0, 50, 40);
 
         getContentPane().add(jInternalFrameBemVindo);
-        jInternalFrameBemVindo.setBounds(0, 130, 970, 460);
+        jInternalFrameBemVindo.setBounds(0, 120, 1000, 510);
 
         jLabelUser.setText("Usuario");
         getContentPane().add(jLabelUser);
-        jLabelUser.setBounds(0, 100, 100, 30);
+        jLabelUser.setBounds(0, 60, 100, 20);
 
         jLabelTelaPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundoPrincipal02.png"))); // NOI18N
         getContentPane().add(jLabelTelaPrincipal);
-        jLabelTelaPrincipal.setBounds(0, 0, 970, 590);
+        jLabelTelaPrincipal.setBounds(0, 0, 1000, 630);
 
-        jMenuBar1.setBackground(new java.awt.Color(222, 217, 217));
+        jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
         jMenuBar1.setForeground(new java.awt.Color(0, 0, 0));
 
-        jMenuCad.setBackground(new java.awt.Color(222, 217, 217));
+        jMenuCad.setBackground(new java.awt.Color(255, 255, 255));
         jMenuCad.setForeground(new java.awt.Color(0, 0, 0));
         jMenuCad.setText("Cadastro");
 
@@ -222,12 +242,58 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuCad);
 
-        jMenuRela.setBackground(new java.awt.Color(222, 217, 217));
+        jMenuRela.setBackground(new java.awt.Color(255, 255, 255));
         jMenuRela.setForeground(new java.awt.Color(0, 0, 0));
         jMenuRela.setText("Relatório");
+
+        jMenuItemRelMedico.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemRelMedico.setText("Medico");
+        jMenuItemRelMedico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemRelMedicoActionPerformed(evt);
+            }
+        });
+        jMenuRela.add(jMenuItemRelMedico);
+
+        jMenuItemRelEnfermeiro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemRelEnfermeiro.setText("Enfermeiro");
+        jMenuItemRelEnfermeiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemRelEnfermeiroActionPerformed(evt);
+            }
+        });
+        jMenuRela.add(jMenuItemRelEnfermeiro);
+
+        jMenuItemRelPaciente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemRelPaciente.setText("Paciente");
+        jMenuItemRelPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemRelPacienteActionPerformed(evt);
+            }
+        });
+        jMenuRela.add(jMenuItemRelPaciente);
+
+        jMenuItemRelUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemRelUsuario.setText("Usuario");
+        jMenuItemRelUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemRelUsuarioActionPerformed(evt);
+            }
+        });
+        jMenuRela.add(jMenuItemRelUsuario);
+
+        jMenuItemCon.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemCon.setText("Consulta");
+        jMenuItemCon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConActionPerformed(evt);
+            }
+        });
+        jMenuRela.add(jMenuItemCon);
+
         jMenuBar1.add(jMenuRela);
 
-        jMenuFerra.setBackground(new java.awt.Color(222, 217, 217));
+        jMenuFerra.setBackground(new java.awt.Color(255, 255, 255));
         jMenuFerra.setForeground(new java.awt.Color(0, 0, 0));
         jMenuFerra.setText("Ferramentas");
 
@@ -242,11 +308,44 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuFerra);
 
-        jMenuAjuda.setBackground(new java.awt.Color(222, 217, 217));
+        jMenu2.setBackground(new java.awt.Color(255, 255, 255));
+        jMenu2.setForeground(new java.awt.Color(0, 0, 0));
+        jMenu2.setText("Agenda");
+
+        jMenuItemAgen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemAgen.setText("Agendamento");
+        jMenuItemAgen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAgenActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItemAgen);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem2.setText("Agenda do Dia");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem3.setText("Agenda do Medico");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenuAjuda.setBackground(new java.awt.Color(255, 255, 255));
         jMenuAjuda.setForeground(new java.awt.Color(0, 0, 0));
         jMenuAjuda.setText("Ajuda");
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.ALT_MASK));
         jMenuItem1.setText("Sobre");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -257,11 +356,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuAjuda);
 
-        jMenu1.setBackground(new java.awt.Color(222, 217, 217));
+        jMenu1.setBackground(new java.awt.Color(255, 255, 255));
         jMenu1.setForeground(new java.awt.Color(0, 0, 0));
         jMenu1.setText("Opções");
 
-        jMenuItemOutra.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemOutra.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemOutra.setText("Usar Outra Conta?");
         jMenuItemOutra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -283,7 +382,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        setSize(new java.awt.Dimension(971, 611));
+        setSize(new java.awt.Dimension(1016, 688));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -437,6 +536,112 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItemCadEnfermeiroActionPerformed
 
+    private void jButtonAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgendaActionPerformed
+        if(telaAgen == null){
+            telaAgen = new TelaAgendamento();
+            telaAgen.setVisible(true);
+        }else
+            telaAgen.setVisible(true);
+    }//GEN-LAST:event_jButtonAgendaActionPerformed
+
+    private void jMenuItemAgenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAgenActionPerformed
+        if(telaAgen == null){
+            telaAgen = new TelaAgendamento();
+            telaAgen.setVisible(true);
+        }else
+            telaAgen.setVisible(true);
+    }//GEN-LAST:event_jMenuItemAgenActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        TelaAgenda agen = new TelaAgenda();
+        agen.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        TelaAgenMedico agenda = new TelaAgenMedico();
+        agenda.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItemRelMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelMedicoActionPerformed
+        int imprimir = JOptionPane.showConfirmDialog(null, "Deseja fazer a impressao?","Atencao", JOptionPane.YES_NO_OPTION);
+        if(imprimir == JOptionPane.YES_OPTION){
+            String url ="C:/Users/Freeware Sys/Documents/NetBeansProjects/ProjectoClinica/reports/Medicos/Relatorio de Medico.jasper";
+            
+            JasperPrint jasper = null;
+            try {
+                jasper = JasperFillManager.fillReport(url, null, conecta.con);
+            } catch (JRException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao gerar relatorio\n"+e.getMessage());
+            }
+            JasperViewer view = new JasperViewer(jasper, false);
+            view.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItemRelMedicoActionPerformed
+
+    private void jMenuItemRelEnfermeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelEnfermeiroActionPerformed
+        int imprimir = JOptionPane.showConfirmDialog(null, "Deseja fazer a impressao?","Atencao", JOptionPane.YES_NO_OPTION);
+        if(imprimir == JOptionPane.YES_OPTION){
+            String url ="C:/Users/Freeware Sys/Documents/NetBeansProjects/ProjectoClinica/reports/Enfermeiros/Relatorio de Enfermeiro.jasper";
+            
+            JasperPrint jasper = null;
+            try {
+                jasper = JasperFillManager.fillReport(url, null, conecta.con);
+            } catch (JRException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao gerar relatorio\n"+e.getMessage());
+            }
+            JasperViewer view = new JasperViewer(jasper, false);
+            view.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItemRelEnfermeiroActionPerformed
+
+    private void jMenuItemRelPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelPacienteActionPerformed
+        int imprimir = JOptionPane.showConfirmDialog(null, "Deseja fazer a impressao?","Atencao", JOptionPane.YES_NO_OPTION);
+        if(imprimir == JOptionPane.YES_OPTION){
+            String url ="C:/Users/Freeware Sys/Documents/NetBeansProjects/ProjectoClinica/reports/Paciente/Relatorio de Pacientes.jasper";
+            
+            JasperPrint jasper = null;
+            try {
+                jasper = JasperFillManager.fillReport(url, null, conecta.con);
+            } catch (JRException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao gerar relatorio\n"+e.getMessage());
+            }
+            JasperViewer view = new JasperViewer(jasper, false);
+            view.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItemRelPacienteActionPerformed
+
+    private void jMenuItemRelUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelUsuarioActionPerformed
+        int imprimir = JOptionPane.showConfirmDialog(null, "Deseja fazer a impressao?","Atencao", JOptionPane.YES_NO_OPTION);
+        if(imprimir == JOptionPane.YES_OPTION){
+            String url ="C:/Users/Freeware Sys/Documents/NetBeansProjects/ProjectoClinica/reports/Usuario/Relatorio de Usuario.jasper";
+            
+            JasperPrint jasper = null;
+            try {
+                jasper = JasperFillManager.fillReport(url, null, conecta.con);
+            } catch (JRException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao gerar relatorio\n"+e.getMessage());
+            }
+            JasperViewer view = new JasperViewer(jasper, false);
+            view.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItemRelUsuarioActionPerformed
+
+    private void jMenuItemConActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConActionPerformed
+        int imprimir = JOptionPane.showConfirmDialog(null, "Deseja fazer a impressao?","Atencao", JOptionPane.YES_NO_OPTION);
+        if(imprimir == JOptionPane.YES_OPTION){
+            String url ="C:/Users/Freeware Sys/Documents/NetBeansProjects/ProjectoClinica/reports/Consulta/Relatorio da Consulta.jasper";
+            
+            JasperPrint jasper = null;
+            try {
+                jasper = JasperFillManager.fillReport(url, null, conecta.con);
+            } catch (JRException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao gerar relatorio\n"+e.getMessage());
+            }
+            JasperViewer view = new JasperViewer(jasper, false);
+            view.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItemConActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -489,17 +694,26 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTelaPrincipal;
     private javax.swing.JLabel jLabelUser;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenuAjuda;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCad;
     private javax.swing.JMenu jMenuFerra;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItemAgen;
     private javax.swing.JMenuItem jMenuItemCadAdmin;
     private javax.swing.JMenuItem jMenuItemCadEnfermeiro;
     private javax.swing.JMenuItem jMenuItemCadMedico;
     private javax.swing.JMenuItem jMenuItemCadPaciente;
+    private javax.swing.JMenuItem jMenuItemCon;
     private javax.swing.JMenuItem jMenuItemFerraTela;
     private javax.swing.JMenuItem jMenuItemOutra;
+    private javax.swing.JMenuItem jMenuItemRelEnfermeiro;
+    private javax.swing.JMenuItem jMenuItemRelMedico;
+    private javax.swing.JMenuItem jMenuItemRelPaciente;
+    private javax.swing.JMenuItem jMenuItemRelUsuario;
     private javax.swing.JMenuItem jMenuItemSair;
     private javax.swing.JMenu jMenuRela;
     private javax.swing.JPanel jPanelPrincipal;
