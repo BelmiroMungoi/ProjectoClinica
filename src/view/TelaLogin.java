@@ -2,7 +2,6 @@
 package view;
 
 import java.awt.Color;
-import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import modelConexao.ConexaoDb;
 
