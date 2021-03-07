@@ -77,9 +77,18 @@ public class TelaMedico extends javax.swing.JFrame {
 
         jTextFieldNome.setEnabled(false);
 
-        jFormattedTextFieldBi.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        try {
+            jFormattedTextFieldBi.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         jFormattedTextFieldBi.setToolTipText("Insira 13 Caracteres");
         jFormattedTextFieldBi.setEnabled(false);
+        jFormattedTextFieldBi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextFieldBiActionPerformed(evt);
+            }
+        });
 
         try {
             jFormattedTextFieldCrm.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##########")));
@@ -154,6 +163,12 @@ public class TelaMedico extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTableMedico);
+
+        jTextFieldPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldPesquisaKeyReleased(evt);
+            }
+        });
 
         jButtonPesquisa.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButtonPesquisa.setForeground(new java.awt.Color(0, 0, 0));
@@ -471,6 +486,14 @@ public class TelaMedico extends javax.swing.JFrame {
         jFormattedTextFieldCrm.setEnabled(false);
         connect.desconectar();
     }//GEN-LAST:event_jTableMedicoMouseClicked
+
+    private void jTextFieldPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPesquisaKeyReleased
+        
+    }//GEN-LAST:event_jTextFieldPesquisaKeyReleased
+
+    private void jFormattedTextFieldBiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldBiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextFieldBiActionPerformed
     
     public void preencherTabela(String Sql) {
         ArrayList dados = new ArrayList();

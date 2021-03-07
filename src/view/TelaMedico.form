@@ -229,12 +229,15 @@
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldBi">
           <Properties>
-            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-              <Format subtype="0" type="0"/>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+              <Format format="###-####" subtype="-1" type="5"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Insira 13 Caracteres"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedTextFieldBiActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldCrm">
           <Properties>
@@ -360,6 +363,9 @@
           </SubComponents>
         </Container>
         <Component class="javax.swing.JTextField" name="jTextFieldPesquisa">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldPesquisaKeyReleased"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonPesquisa">
           <Properties>
